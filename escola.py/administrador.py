@@ -13,10 +13,24 @@ def listar_todos(conexao):
 
 def relatorio(conexao):
     cursor = conexao.cursor()
+
     cursor.execute("SELECT * FROM aluno")
     alunos = cursor.fetchall()
 
-    print("Quantidade de alunos:", len(alunos))
+    quantidade = len(alunos)
+
+    print("Quantidade de alunos:", quantidade)
+
+    if quantidade > 0:
+        cursor.execute("""
+            SELECT AVG((nota1 + nota2) / 2)
+            FROM aluno
+        """)
+        media_geral = cursor.fetchone()[0]
+
+        print("Média geral:", round(media_geral, 2))
+    else:
+        print("Não há alunos cadastrados.")
 
 
 def limpar_registros(conexao):
@@ -36,7 +50,7 @@ def menu_admin(conexao):
 
     while True:
 
-        print("\n=== ADMINISTRADOR ===")
+        print("\n ADMINISTRADOR ")
         print("1 - Listar todos os alunos")
         print("2 - Relatório")
         print("3 - Limpar registros")
