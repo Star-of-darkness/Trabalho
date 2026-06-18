@@ -3,7 +3,7 @@ def menu_aluno(conexao):
    
     cursor = conexao.cursor()
    
-    # Busca apenas os dados do aluno logado
+ 
     cursor.execute("SELECT nome, idade, turma, media FROM aluno WHERE id = %s", (id_aluno,))
     aluno = cursor.fetchone()
    
@@ -11,7 +11,7 @@ def menu_aluno(conexao):
         print("Aluno não encontrado.")
         return
  
-    # Organiza os dados no formato de dicionário
+   
     dados_alunos = [{
         'Nome': aluno[0],
         'Idade': aluno[1],
@@ -39,7 +39,3 @@ def menu_aluno(conexao):
            
         else:
             print("Opção inválida.")
- 
- 
- 
- 
