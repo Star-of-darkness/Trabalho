@@ -1,6 +1,3 @@
-from administrador import *
-from main import *
-from dbConnection import *
 def listar_alunos(conexao):
     cursor = conexao.cursor()
 
@@ -13,6 +10,7 @@ def listar_alunos(conexao):
 
     for aluno in alunos:
         print(aluno)
+
 
 
 def registrar_nota(conexao):
@@ -110,6 +108,7 @@ def menu_professor(conexao):
         print("3 - Editar aluno")
         print("4 - Remover aluno")
         print("5 - Buscar aluno")
+        print("6 - Registrar aluno")
         print("0 - Voltar")
 
         opcao = input("Escolha: ")
@@ -120,7 +119,7 @@ def menu_professor(conexao):
         elif opcao == "2":
             registrar_nota(conexao)
 
-        elif opcao == "3":
+        elif opcao == "3" or "6":
             editar_aluno(conexao)
 
         elif opcao == "4":
