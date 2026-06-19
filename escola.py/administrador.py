@@ -1,5 +1,6 @@
 def listar_todos(conexao):
     cursor = conexao.cursor()
+
     cursor.execute("SELECT * FROM aluno")
     alunos = cursor.fetchall()
 
@@ -17,30 +18,20 @@ def relatorio(conexao):
     cursor.execute("SELECT * FROM aluno")
     alunos = cursor.fetchall()
 
-    quantidade = len(alunos)
-
-    print("Quantidade de alunos:", quantidade)
-
-    if quantidade > 0:
-        cursor.execute("""
-            SELECT AVG((nota1 + nota2) / 2)
-            FROM aluno
-        """)
-        media_geral = cursor.fetchone()[0]
-
-        print("Média geral:", round(media_geral, 2))
-    else:
-        print("Não há alunos cadastrados.")
+    print("Quantidade de alunos:", len(alunos))
 
 
 def limpar_registros(conexao):
     cursor = conexao.cursor()
 
-    confirmacao = input("Tem certeza que deseja apagar todos os registros? (S/N): ").strip().upper()
+    confirmacao = input(
+        "Tem certeza que deseja apagar todos os registros? (S/N): "
+    ).strip().upper()
 
     if confirmacao == "S":
         cursor.execute("DELETE FROM aluno")
         conexao.commit()
+
         print("Registros apagados!")
     else:
         print("Operação cancelada.")
