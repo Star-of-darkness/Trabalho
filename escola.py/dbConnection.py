@@ -29,7 +29,7 @@ def create_table(connection):
     cursor = connection.cursor()
  
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS aluno (
+        CREATE TABLE IF NOT EXISTS alunos (
  
             id INT AUTO_INCREMENT PRIMARY KEY,
  

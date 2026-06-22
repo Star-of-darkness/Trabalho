@@ -1,21 +1,21 @@
 def listar_todos(conexao):
     cursor = conexao.cursor()
 
-    cursor.execute("SELECT * FROM aluno")
+    cursor.execute("SELECT * FROM alunos")
     alunos = cursor.fetchall()
 
     if not alunos:
         print("Nenhum aluno cadastrado.")
         return
 
-    for aluno in alunos:
-        print(aluno)
+    for alunos in alunos:
+        print(alunos)
 
 
 def relatorio(conexao):
     cursor = conexao.cursor()
 
-    cursor.execute("SELECT * FROM aluno")
+    cursor.execute("SELECT * FROM alunos")
     alunos = cursor.fetchall()
 
     print("Quantidade de alunos:", len(alunos))
@@ -29,7 +29,7 @@ def limpar_registros(conexao):
     ).strip().upper()
 
     if confirmacao == "S":
-        cursor.execute("DELETE FROM aluno")
+        cursor.execute("DELETE FROM alunos")
         conexao.commit()
 
         print("Registros apagados!")

@@ -1,15 +1,15 @@
 def listar_alunos(conexao):
     cursor = conexao.cursor()
  
-    cursor.execute("SELECT * FROM aluno")
+    cursor.execute("SELECT * FROM alunos")
     alunos = cursor.fetchall()
  
     if not alunos:
         print("Nenhum aluno cadastrado.")
         return
  
-    for aluno in alunos:
-        print(aluno)
+    for alunos in alunos:
+        print(alunos)
  
 def registrar_aluno(conexao):
     nome = input("Nome do aluno: ").strip()
@@ -38,7 +38,7 @@ def registrar_aluno(conexao):
     cursor = conexao.cursor()
 
     cursor.execute("""
-        INSERT INTO aluno (nome, idade, turma)
+        INSERT INTO alunos (nome, idade, turma)
         VALUES (%s, %s, %s)
     """, (nome, idade, turma))
 
@@ -63,7 +63,7 @@ def registrar_nota(conexao):
     cursor = conexao.cursor()
  
     cursor.execute("""
-        UPDATE aluno
+        UPDATE alunos
         SET media = %s, situacao = %s
         WHERE id = %s
     """, (media, situacao, id_aluno))
@@ -83,7 +83,7 @@ def editar_aluno(conexao):
     cursor = conexao.cursor()
  
     cursor.execute("""
-        UPDATE aluno
+        UPDATE alunos
         SET nome = %s,
             idade = %s,
             turma = %s
@@ -101,7 +101,7 @@ def remover_aluno(conexao):
     cursor = conexao.cursor()
  
     cursor.execute(
-        "DELETE FROM aluno WHERE id = %s",
+        "DELETE FROM alunos WHERE id = %s",
         (id_aluno,)
     )
  
@@ -116,7 +116,7 @@ def buscar_aluno(conexao):
     cursor = conexao.cursor()
  
     cursor.execute(
-        "SELECT * FROM aluno WHERE nome LIKE %s",
+        "SELECT * FROM alunos WHERE nome LIKE %s",
         (f"%{nome}%",)
     )
  
@@ -126,8 +126,8 @@ def buscar_aluno(conexao):
         print("Aluno não encontrado.")
         return
  
-    for aluno in alunos:
-        print(aluno)
+    for alunos in alunos:
+        print(alunos)
 
 
 def menu_professor(conexao):
