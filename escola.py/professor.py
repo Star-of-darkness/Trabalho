@@ -11,7 +11,40 @@ def listar_alunos(conexao):
     for aluno in alunos:
         print(aluno)
  
- 
+def registrar_aluno(conexao):
+    nome = input("Nome do aluno: ").strip()
+
+    if not nome:
+        print("O nome não pode ficar vazio.")
+        return
+
+    try:
+        idade = int(input("Idade: "))
+
+        if idade <= 0:
+            print("A idade deve ser maior que zero.")
+            return
+
+    except ValueError:
+        print("Digite uma idade válida.")
+        return
+
+    turma = input("Turma: ").strip()
+
+    if not turma:
+        print("A turma não pode ficar vazia.")
+        return
+
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        INSERT INTO aluno (nome, idade, turma)
+        VALUES (%s, %s, %s)
+    """, (nome, idade, turma))
+
+    conexao.commit()
+
+    print("Aluno cadastrado com sucesso!")
  
 def registrar_nota(conexao):
     id_aluno = input("ID do aluno: ")
@@ -119,7 +152,7 @@ def menu_professor(conexao):
         elif opcao == "2":
             registrar_nota(conexao)
 
-        elif opcao == "3" or "6":
+        elif opcao == "3":
             editar_aluno(conexao)
  
         elif opcao == "4":
@@ -127,6 +160,10 @@ def menu_professor(conexao):
  
         elif opcao == "5":
             buscar_aluno(conexao)
+    
+
+        elif opcao == "6":
+           registrar_aluno(conexao)
 
         elif opcao == "0":
             break
